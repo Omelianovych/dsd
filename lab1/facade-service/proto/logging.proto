@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package logging;
+
+service LoggingService {
+    rpc LogMessage (LogRequest) returns (LogResponse);
+    rpc GetAllMessages (Empty) returns (MessagesResponse);
+}
+
+message Empty {}
+
+message LogRequest {
+    string uuid = 1;
+    string message = 2;
+}
+
+message LogResponse {
+    bool success = 1;
+}
+
+message MessagesResponse {
+    repeated string messages = 1;
+}
