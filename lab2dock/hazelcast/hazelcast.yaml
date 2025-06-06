@@ -9,4 +9,10 @@ hazelcast:
           - hazelcast1
           - hazelcast2
           - hazelcast3
+
   cluster-name: dev
+
+  queue:
+    - name: "bounded-queue"
+      max-size: 10
+      backup-count: 1
