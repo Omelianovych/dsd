@@ -11,7 +11,7 @@ import uuid
 from tenacity import retry, wait_fixed, stop_after_attempt, RetryError
 
 def get_service_addresses(service_name: str):
-    # Отримання IP з config-server
+
     response = requests.get(f"http://127.0.0.1:8002/services/{service_name}")
     response.raise_for_status()
     return response.json()
@@ -67,7 +67,7 @@ def send_message(request: MessageRequest):
 
 @app.get("/fetch")
 def fetch_messages():
-    # Logging Service
+
     logging_stub, logging_channel = get_grpc_stub_random("logging-service", "LoggingServiceStub", logging_pb2_grpc)
     log_response = logging_stub.GetAllMessages(logging_pb2.Empty())
     logging_channel.close()
