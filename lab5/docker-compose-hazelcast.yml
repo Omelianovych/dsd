@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  hazelcast1:
+    image: hazelcast/hazelcast:5.5.0 
+    container_name: hazelcast1
+    volumes:
+      - ./hazelcast/hazelcast.yaml:/opt/hazelcast/config/hazelcast.yaml
+    ports:
+      - "5701:5701"
+    environment:
+      - HZ_CONFIG=/opt/hazelcast/config/hazelcast.yaml
+
+  hazelcast2:
+    image: hazelcast/hazelcast:5.5.0 
+    container_name: hazelcast2
+    volumes:
+      - ./hazelcast/hazelcast.yaml:/opt/hazelcast/config/hazelcast.yaml
+    ports:
+      - "5702:5701"
+    environment:
+      - HZ_CONFIG=/opt/hazelcast/config/hazelcast.yaml
+
+  hazelcast3:
+    image: hazelcast/hazelcast:5.5.0 
+    container_name: hazelcast3
+    volumes:
+      - ./hazelcast/hazelcast.yaml:/opt/hazelcast/config/hazelcast.yaml
+    ports:
+      - "5703:5701"
+    environment:
+      - HZ_CONFIG=/opt/hazelcast/config/hazelcast.yaml
+
+  management-center:
+    image: hazelcast/management-center:5.5.0 
+    container_name: hazelcast-mc
+    ports:
+      - "8081:8080"
+    environment:
+      - MC_DEFAULT_CLUSTER=dev
+      - MC_DEFAULT_CLUSTER_MEMBERS=hazelcast1:5701,hazelcast2:5701,hazelcast3:5701
